@@ -42,20 +42,21 @@ app.use(function(err, req, res, next) {
  * Look up the node module 'fs' ex: require('fs');
  */
 app.get("/", (request, response) => {
-    //this is a Web page so set the content-type to HTML
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    for (i = 1; i < 7; i++) {
-        //write a response to the client
-        response.write('<h' + i + ' style="color:blue">Hello World!</h' + i + '>'); 
-    }
-    response.end(); //end the response
+    // //this is a Web page so set the content-type to HTML
+    // response.writeHead(200, {'Content-Type': 'text/html'});
+    // for (i = 1; i < 7; i++) {
+    //     //write a response to the client
+    //     response.write('<h' + i + ' style="color:blue">Hello World!</h' + i + '>'); 
+    // }
+    // response.end(); //end the response
+    response.redirect(301, '/doc');
 });
 
 /*
  * Serve the API documentation genertated by apidoc as HTML. 
  * https://apidocjs.com/
  */
-// app.use("/doc", express.static('apidoc'))
+app.use("/doc", express.static('apidoc'))
 
 /* 
 * Heroku will assign a port you can use via the 'PORT' environment variable
