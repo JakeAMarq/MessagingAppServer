@@ -20,9 +20,9 @@ const pool = new Pool({
 
 app.use('/signin', require('./routes/signin.js'))
 app.use('/register', require('./routes/register.js'))
-app.use('/chats', require('./routes/chats.js'))
-app.use('/contacts', require('./routes/contacts/js'))
 app.use('/weather', require('./routes/weather.js'))
+app.use('/chats', middleware.checkToken, require('./routes/chats.js'))
+app.use('/contacts', middleware.checkToken, require('./routes/contacts/js'))
 
 /*
  * This middleware function will respond to inproperly formed JSON in 
