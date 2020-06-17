@@ -66,7 +66,7 @@ router.post("/", (request, response, next) => {
     let values = [request.body.chatId, request.decoded.memberid]
     pool.query(insert, values)
         .then(result => {
-            response.send({
+            response.status(201).send({
                 success: true, 
                 chatId: request.body.chatId,
                 chatName: request.body.name
@@ -146,7 +146,7 @@ router.delete("/:chatId", (request, response, next) => {
                 })
             } else {
                 if (result.rows[0].email != request.decoded.email) {
-                    response.status(404).send({
+                    response.status(401).send({
                         message: "Only the chat room owner can delete the chat room"
                     })
                 } else {
@@ -272,7 +272,7 @@ router.put("/", (request, response, next) => {
                 })
             } else {
                 if (result.rows[0].email != request.decoded.email) {
-                    response.status(404).send({
+                    response.status(401).send({
                         message: "Only chat room owners can add/delete users"
                     })
                 } else {
@@ -317,7 +317,7 @@ router.put("/", (request, response, next) => {
     pool.query(query, values)
         .then(result => {
             if (result.rowCount == 0) {
-                response.status(404).send({
+                response.status(400).send({
                     message: "User is not in contact list"
                 })
             } else {
@@ -504,7 +504,7 @@ router.delete("/:chatId/:email", (request, response, next) => {
             } else {
                 if (result.rows[0].email != request.decoded.email
                     && request.params.email != request.decoded.email) {
-                    response.status(404).send({
+                    response.status(401).send({
                         message: "Only chat room owners can add/delete users"
                     })
                 } else {
