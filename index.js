@@ -9,29 +9,22 @@ const bodyParser = require("body-parser");
 //This allows parsing of the body of POST requests, that are encoded in JSON
 app.use(bodyParser.json())
 
-//Obtain a Pool of DB connections. 
-const { Pool } = require('pg')
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false,
-    }
-})
-
-app.use('/signin', require('./routes/signin.js'))
-app.use('/register', require('./routes/register.js'))
-app.use('/weather', require('./routes/weather.js'))
+app.use('/auth', require('./routes/signin.js'))
+app.use('/auth', require('./routes/register.js'))
+// app.use('/weather', require('./routes/weather.js'))
 app.use('/chats', middleware.checkToken, require('./routes/chats.js'))
-app.use('/contacts', middleware.checkToken, require('./routes/contacts/js'))
+app.use('/contacts', middleware.checkToken, require('./routes/contacts.js'))
 
 /*
- * This middleware function will respond to inproperly formed JSON in 
+ * This middleware function will respond to improperly formed JSON in 
  * request parameters.
  */
 app.use(function(err, req, res, next) {
 
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
-    res.status(400).send({ message: "malformed JSON in parameters" });
+    res.status(400).send({ 
+      message: "malformed JSON in parameters" 
+    });
   } else next();
 })
 

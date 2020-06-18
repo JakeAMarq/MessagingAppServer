@@ -1,0 +1,11 @@
+First/last name: 
+    - Letters only
+    - 1 <= length <= 30
+Username:
+    - Letters and numbers only 
+    - 1 <= length <= 30
+    - Unique
+Password:
+    - Must have 1 uppercase letter 
+    - Must have 1 special character
+    - length <= 8

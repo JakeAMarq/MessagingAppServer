@@ -29,13 +29,11 @@ let config = {
  * @apiSuccess {String} message Authentication successful!
  * @apiSuccess {String} token JSON Web Token
  * 
- * @apiError (400: Missing Parameters) {String} message "Missing required information"
+ * @apiError (404: User Not Found) {String} message User not found
+ * @apiError (400: Missing Parameters) {String} message Missing required information
+ * @apiError (400: Invalid Credentials) {String} message Credentials did not match
  * 
- * @apiError (404: User Not Found) {String} message "User not found"
- * 
- * @apiError (400: Invalid Credentials) {String} message "Credentials did not match"
- * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  */ 
 router.get('/signin/', (request, response) => {
     if (!request.headers.authorization || request.headers.authorization.indexOf('Basic ') === -1) {
@@ -52,6 +50,7 @@ router.get('/signin/', (request, response) => {
         pool.query(theQuery, values)
             .then(result => { 
                 if (result.rowCount == 0) {
+                    console.log(53);
                     response.status(404).send({
                         message: 'User not found' 
                     })
@@ -78,6 +77,7 @@ router.get('/signin/', (request, response) => {
                         }
                     )
                     //package and send the results
+                    console.log(79);
                     response.json({
                         success: true,
                         message: 'Authentication successful!',
@@ -85,6 +85,7 @@ router.get('/signin/', (request, response) => {
                     })
                 } else {
                     //credentials dod not match
+                    console.log(86);
                     response.status(400).send({
                         message: 'Credentials did not match' 
                     })
@@ -93,11 +94,13 @@ router.get('/signin/', (request, response) => {
             .catch((err) => {
                 //log the error
                 //console.log(err.stack)
-                res.status(400).send({
+                console.log(err);
+                response.status(400).send({
                     message: err.detail
                 })
             })
     } else {
+        console.log(99);
         response.status(400).send({
             message: "Missing required information"
         })

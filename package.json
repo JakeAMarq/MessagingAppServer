@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "index.js",
-    "doc": "apidoc -i routes/ -o apidoc/"
+    "doc": "apidoc -i routes/ -o apidoc/",
+    "docs": "apidoc -i routes/ -o apidoc/"
   },
   "keywords": [
     "TCSS450",

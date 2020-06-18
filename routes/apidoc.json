@@ -1,9 +1,9 @@
 {
-    "name": "Lab 4",
+    "name": "Messaging App",
     "version": "0.1.0",
-    "description": "The Lab 4 API Documentation",
-    "title": "Lab 4 API Doc",
-    "url" : "https://cfb3-lab4-backend-2020sp.herokuapp.com",
+    "description": "The Messaging App API Documentation",
+    "title": "Messaging App API Doc",
+    "url" : "https://jakeamarq-messaging-app.herokuapp.com/",
     "order": [
       "Auth",
       "Contacts",

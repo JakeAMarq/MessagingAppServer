@@ -66,7 +66,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ]
       }
@@ -155,7 +155,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ]
       }
@@ -232,7 +232,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: Username exists": [
@@ -241,7 +241,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Username exists&quot;</p>"
+            "description": "<p>Username exists</p>"
           }
         ],
         "400: Email exists": [
@@ -250,7 +250,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Email exists&quot;</p>"
+            "description": "<p>Email exists</p>"
           }
         ],
         "400: SQL Error": [
@@ -259,7 +259,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ]
       }
@@ -316,22 +316,22 @@
     },
     "error": {
       "fields": {
-        "400: Missing Parameters": [
-          {
-            "group": "400: Missing Parameters",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
-          }
-        ],
         "404: User Not Found": [
           {
             "group": "404: User Not Found",
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;User not found&quot;</p>"
+            "description": "<p>User not found</p>"
+          }
+        ],
+        "400: Missing Parameters": [
+          {
+            "group": "400: Missing Parameters",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: Invalid Credentials": [
@@ -340,7 +340,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Credentials did not match&quot;</p>"
+            "description": "<p>Credentials did not match</p>"
           }
         ],
         "400: SQL Error": [
@@ -349,7 +349,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ]
       }
@@ -425,7 +425,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -434,7 +434,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -513,16 +513,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Chat ID not found&quot;</p>"
-          }
-        ],
-        "404: Unauthorized": [
-          {
-            "group": "404: Unauthorized",
-            "type": "String",
-            "optional": false,
-            "field": "message",
-            "description": "<p>&quot;Only chat room owners can add/delete users&quot;</p>"
+            "description": "<p>Chat ID not found</p>"
           }
         ],
         "404: Not contacts": [
@@ -531,7 +522,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;User is not in contact list&quot;</p>"
+            "description": "<p>User is not in contact list</p>"
           }
         ],
         "404: Email Not Found": [
@@ -540,7 +531,16 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Email not found&quot;</p>"
+            "description": "<p>Email not found</p>"
+          }
+        ],
+        "401: Unauthorized": [
+          {
+            "group": "401: Unauthorized",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Only chat room owners can add/delete users</p>"
           }
         ],
         "400: Invalid Parameter": [
@@ -549,7 +549,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Malformed parameter. chatId must be a number&quot;</p>"
+            "description": "<p>Malformed parameter. chatId must be a number</p>"
           }
         ],
         "400: Duplicate Email": [
@@ -558,7 +558,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;User already in chat room&quot;</p>"
+            "description": "<p>User already in chat room</p>"
           }
         ],
         "400: Missing Parameters": [
@@ -567,7 +567,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -576,7 +576,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -635,16 +635,16 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Chat ID not found&quot;</p>"
+            "description": "<p>Chat ID not found</p>"
           }
         ],
-        "404: Unauthorized": [
+        "401: Unauthorized": [
           {
-            "group": "404: Unauthorized",
+            "group": "401: Unauthorized",
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Only the chat room owner can delete the chat room&quot;</p>"
+            "description": "<p>Only the chat room owner can delete the chat room</p>"
           }
         ],
         "400: Invalid Parameter": [
@@ -653,7 +653,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Malformed parameter. chatId must be a number&quot;</p>"
+            "description": "<p>Malformed parameter. chatId must be a number</p>"
           }
         ],
         "400: Missing Parameters": [
@@ -662,7 +662,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -671,7 +671,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -758,7 +758,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Member not Found&quot;</p>"
+            "description": "<p>Member not Found</p>"
           }
         ],
         "400: Invalid Parameter": [
@@ -767,7 +767,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Malformed parameter. chatId must be a number&quot;</p>"
+            "description": "<p>Malformed parameter. chatId must be a number</p>"
           }
         ],
         "400: Missing Parameters": [
@@ -776,7 +776,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -785,7 +785,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -870,7 +870,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Chat ID Not Found&quot;</p>"
+            "description": "<p>Chat ID Not Found</p>"
           }
         ],
         "400: Invalid Parameter": [
@@ -879,7 +879,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Malformed parameter. chatId must be a number&quot;</p>"
+            "description": "<p>Malformed parameter. chatId must be a number</p>"
           }
         ],
         "400: Missing Parameters": [
@@ -888,7 +888,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -897,7 +897,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -963,7 +963,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Chat ID not found&quot;</p>"
+            "description": "<p>Chat ID not found</p>"
           }
         ],
         "404: Email Not Found": [
@@ -972,16 +972,16 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Email not found&quot;</p>"
+            "description": "<p>Email not found</p>"
           }
         ],
-        "404: Unauthorized": [
+        "401: Unauthorized": [
           {
-            "group": "404: Unauthorized",
+            "group": "401: Unauthorized",
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Only chat room owners can add/delete users&quot;</p>"
+            "description": "<p>Only chat room owners can add/delete users</p>"
           }
         ],
         "400: Invalid Parameter": [
@@ -990,7 +990,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Malformed parameter. chatId must be a number&quot;</p>"
+            "description": "<p>Malformed parameter. chatId must be a number</p>"
           }
         ],
         "400: Duplicate Email": [
@@ -999,7 +999,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;User not in chat&quot;</p>"
+            "description": "<p>User not in chat</p>"
           }
         ],
         "400: Missing Parameters": [
@@ -1008,7 +1008,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -1017,7 +1017,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -1036,10 +1036,10 @@
     "groupTitle": "Chats"
   },
   {
-    "type": "post",
-    "url": "chats/",
-    "title": "Send contact request to user",
-    "name": "AddContact",
+    "type": "patch",
+    "url": "chats/accept/",
+    "title": "Accept a user's contact request",
+    "name": "AcceptContact",
     "group": "Contacts",
     "header": {
       "fields": {
@@ -1061,34 +1061,68 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": "<p>the name for the chat</p>"
+            "field": "user",
+            "description": "<p>the username or email of the user whose request is being accepted</p>"
           }
         ]
       }
     },
     "success": {
       "fields": {
-        "Success 201": [
+        "Success 200": [
           {
-            "group": "Success 201",
+            "group": "Success 200",
             "type": "boolean",
             "optional": false,
             "field": "success",
-            "description": "<p>true when the request is sent</p>"
+            "description": "<p>true when the request is accepted</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "accepted",
+            "description": "<p>the username/email (depending on whether a username or email was passed in the body) of the contact that was deleted</p>"
           }
         ]
       }
     },
     "error": {
       "fields": {
+        "404: User not found": [
+          {
+            "group": "404: User not found",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User not found</p>"
+          }
+        ],
+        "404: Contact request not found": [
+          {
+            "group": "404: Contact request not found",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Contact request not found</p>"
+          }
+        ],
+        "404: Contact request already accepted": [
+          {
+            "group": "404: Contact request already accepted",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Contact request already accepted</p>"
+          }
+        ],
         "400: Missing Parameters": [
           {
             "group": "400: Missing Parameters",
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -1097,7 +1131,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -1117,7 +1151,7 @@
   },
   {
     "type": "post",
-    "url": "chats/",
+    "url": "chats/add/",
     "title": "Send contact request to user",
     "name": "AddContact",
     "group": "Contacts",
@@ -1141,8 +1175,8 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": "<p>the name for the chat</p>"
+            "field": "user",
+            "description": "<p>the username or email of the user being sent the contact request</p>"
           }
         ]
       }
@@ -1156,19 +1190,62 @@
             "optional": false,
             "field": "success",
             "description": "<p>true when the request is sent</p>"
+          },
+          {
+            "group": "Success 201",
+            "type": "String",
+            "optional": false,
+            "field": "added",
+            "description": "<p>the username/email (depending on whether a username or email was passed in the request body) of the user being sent the contact request</p>"
           }
         ]
       }
     },
     "error": {
       "fields": {
+        "404: User not found": [
+          {
+            "group": "404: User not found",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User not found</p>"
+          }
+        ],
+        "404: Already contacts": [
+          {
+            "group": "404: Already contacts",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User is already in your contacts list</p>"
+          }
+        ],
+        "404: Request already sent": [
+          {
+            "group": "404: Request already sent",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>You've already send this user a contact request</p>"
+          }
+        ],
+        "404: Request received": [
+          {
+            "group": "404: Request received",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User has already sent you a contact request</p>"
+          }
+        ],
         "400: Missing Parameters": [
           {
             "group": "400: Missing Parameters",
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;Missing required information&quot;</p>"
+            "description": "<p>Missing required information</p>"
           }
         ],
         "400: SQL Error": [
@@ -1177,7 +1254,391 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
+          }
+        ],
+        "400: JSON Error": [
+          {
+            "group": "400: JSON Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;malformed JSON in parameters&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/contacts.js",
+    "groupTitle": "Contacts"
+  },
+  {
+    "type": "post",
+    "url": "chats/delete/",
+    "title": "Delete a user from contacts",
+    "name": "DeleteContact",
+    "group": "Contacts",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Valid JSON Web Token JWT</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user",
+            "description": "<p>the username or email of the contact being deleted</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true when the contact is deleted</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "deleted",
+            "description": "<p>the username/email (depending on whether a username or email was passed in the body) of the contact that was deleted</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "404: User not found": [
+          {
+            "group": "404: User not found",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User not found</p>"
+          }
+        ],
+        "404: User not in contacts": [
+          {
+            "group": "404: User not in contacts",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>User is not in contacts</p>"
+          }
+        ],
+        "400: Missing Parameters": [
+          {
+            "group": "400: Missing Parameters",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Missing required information</p>"
+          }
+        ],
+        "400: SQL Error": [
+          {
+            "group": "400: SQL Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The reported SQL error details</p>"
+          }
+        ],
+        "400: JSON Error": [
+          {
+            "group": "400: JSON Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;malformed JSON in parameters&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/contacts.js",
+    "groupTitle": "Contacts"
+  },
+  {
+    "type": "get",
+    "url": "chats/",
+    "title": "Get contacts list",
+    "name": "GetContacts",
+    "group": "Contacts",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Valid JSON Web Token JWT</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "rowCount",
+            "description": "<p>The number of contacts returned</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "rows",
+            "description": "<p>List of contacts</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.firstname",
+            "description": "<p>The first name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.lastname",
+            "description": "<p>The last name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.username",
+            "description": "<p>The username of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.email",
+            "description": "<p>The email of the contact</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400: SQL Error": [
+          {
+            "group": "400: SQL Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The reported SQL error details</p>"
+          }
+        ],
+        "400: JSON Error": [
+          {
+            "group": "400: JSON Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;malformed JSON in parameters&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/contacts.js",
+    "groupTitle": "Contacts"
+  },
+  {
+    "type": "get",
+    "url": "chats/incoming/",
+    "title": "Get incoming contact requests",
+    "name": "GetIncomingContactRequests",
+    "group": "Contacts",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Valid JSON Web Token JWT</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "rowCount",
+            "description": "<p>The number of contacts returned</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "rows",
+            "description": "<p>List of contacts</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.firstname",
+            "description": "<p>The first name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.lastname",
+            "description": "<p>The last name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.username",
+            "description": "<p>The username of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.email",
+            "description": "<p>The email of the contact</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400: SQL Error": [
+          {
+            "group": "400: SQL Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The reported SQL error details</p>"
+          }
+        ],
+        "400: JSON Error": [
+          {
+            "group": "400: JSON Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;malformed JSON in parameters&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/contacts.js",
+    "groupTitle": "Contacts"
+  },
+  {
+    "type": "get",
+    "url": "chats/incoming/",
+    "title": "Get outgoing contact requests",
+    "name": "GetOutgoingContactRequests",
+    "group": "Contacts",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Valid JSON Web Token JWT</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "rowCount",
+            "description": "<p>The number of contacts returned</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "rows",
+            "description": "<p>List of contacts</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.firstname",
+            "description": "<p>The first name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.lastname",
+            "description": "<p>The last name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.username",
+            "description": "<p>The username of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.email",
+            "description": "<p>The email of the contact</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400: SQL Error": [
+          {
+            "group": "400: SQL Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -1305,7 +1766,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: JSON Error": [
@@ -1402,7 +1863,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>the reported SQL error details</p>"
+            "description": "<p>The reported SQL error details</p>"
           }
         ],
         "400: Unknow Chat ID": [

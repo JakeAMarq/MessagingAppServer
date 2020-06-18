@@ -11,6 +11,8 @@ router.use(require("body-parser").json())
 
 let pushy = require('../utilities/utils').pushy
 
+// TODO: Make chat endpoints support both usernames and emails like contacts
+
 /**
  * @apiDefine JSONError
  * @apiError (400: JSON Error) {String} message "malformed JSON in parameters"
@@ -28,9 +30,8 @@ let pushy = require('../utilities/utils').pushy
  * @apiSuccess (Success 201) {Number} chatId the generated chatId
  * @apiSuccess (Success 201) {String} chatName the name of the chat room
  *  
- * @apiError (400: Missing Parameters) {String} message "Missing required information"
- * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: Missing Parameters) {String} message Missing required information
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  *  
  * @apiUse JSONError
  */ 
@@ -90,12 +91,12 @@ router.post("/", (request, response, next) => {
  * 
  * @apiSuccess {boolean} success true when the chat room is deleted
  * 
- * @apiError (404: Chat Not Found) {String} message "Chat ID not found"
- * @apiError (404: Unauthorized) {String} message "Only the chat room owner can delete the chat room"
- * @apiError (400: Invalid Parameter) {String} message "Malformed parameter. chatId must be a number" 
- * @apiError (400: Missing Parameters) {String} message "Missing required information"
+ * @apiError (404: Chat Not Found) {String} message Chat ID not found
+ * @apiError (401: Unauthorized) {String} message Only the chat room owner can delete the chat room
+ * @apiError (400: Invalid Parameter) {String} message Malformed parameter. chatId must be a number
+ * @apiError (400: Missing Parameters) {String} message Missing required information
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiUse JSONError
  */ 
@@ -217,15 +218,15 @@ router.delete("/:chatId", (request, response, next) => {
  * 
  * @apiSuccess {boolean} success true when the name is inserted
  * 
- * @apiError (404: Chat Not Found) {String} message "Chat ID not found"
- * @apiError (404: Unauthorized) {String} message "Only chat room owners can add/delete users"
- * @apiError (404: Not contacts) {String} message "User is not in contact list"
- * @apiError (404: Email Not Found) {String} message "Email not found"
- * @apiError (400: Invalid Parameter) {String} message "Malformed parameter. chatId must be a number" 
- * @apiError (400: Duplicate Email) {String} message "User already in chat room"
- * @apiError (400: Missing Parameters) {String} message "Missing required information"
+ * @apiError (404: Chat Not Found) {String} message Chat ID not found
+ * @apiError (404: Not contacts) {String} message User is not in contact list
+ * @apiError (404: Email Not Found) {String} message Email not found
+ * @apiError (401: Unauthorized) {String} message Only chat room owners can add/delete users
+ * @apiError (400: Invalid Parameter) {String} message Malformed parameter. chatId must be a number 
+ * @apiError (400: Duplicate Email) {String} message User already in chat room
+ * @apiError (400: Missing Parameters) {String} message Missing required information
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiUse JSONError
  */ 
@@ -403,14 +404,14 @@ router.put("/", (request, response, next) => {
  * 
  * @apiSuccess {boolean} success true when the name is deleted
  * 
- * @apiError (404: Chat Not Found) {String} message "Chat ID not found"
- * @apiError (404: Email Not Found) {String} message "Email not found"
- * @apiError (404: Unauthorized) {String} message "Only chat room owners can add/delete users"
- * @apiError (400: Invalid Parameter) {String} message "Malformed parameter. chatId must be a number" 
- * @apiError (400: Duplicate Email) {String} message "User not in chat"
- * @apiError (400: Missing Parameters) {String} message "Missing required information"
+ * @apiError (404: Chat Not Found) {String} message Chat ID not found
+ * @apiError (404: Email Not Found) {String} message Email not found
+ * @apiError (401: Unauthorized) {String} message Only chat room owners can add/delete users
+ * @apiError (400: Invalid Parameter) {String} message Malformed parameter. chatId must be a number 
+ * @apiError (400: Duplicate Email) {String} message User not in chat
+ * @apiError (400: Missing Parameters) {String} message Missing required information
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiUse JSONError
  */ 
@@ -553,11 +554,11 @@ router.delete("/:chatId/:email", (request, response, next) => {
  * @apiSuccess {Object[]} rows List of members in the chat
  * @apiSuccess {String} rows.email The email for the member in the chat
  * 
- * @apiError (404: ChatId Not Found) {String} message "Chat ID Not Found"
- * @apiError (400: Invalid Parameter) {String} message "Malformed parameter. chatId must be a number" 
- * @apiError (400: Missing Parameters) {String} message "Missing required information"
+ * @apiError (404: ChatId Not Found) {String} message Chat ID Not Found
+ * @apiError (400: Invalid Parameter) {String} message Malformed parameter. chatId must be a number
+ * @apiError (400: Missing Parameters) {String} message Missing required information
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiUse JSONError
  */ 
@@ -630,11 +631,11 @@ router.get("/:chatId", (request, response, next) => {
  * @apiSuccess {String} rows.name The name of the chat room
  * @apiSuccess {String} rows.email The owner of the chat room's email
  * 
- * @apiError (404: Member Not Found) {String} message "Member not Found"
- * @apiError (400: Invalid Parameter) {String} message "Malformed parameter. chatId must be a number" 
- * @apiError (400: Missing Parameters) {String} message "Missing required information"
+ * @apiError (404: Member Not Found) {String} message Member not Found
+ * @apiError (400: Invalid Parameter) {String} message Malformed parameter. chatId must be a number
+ * @apiError (400: Missing Parameters) {String} message Missing required information
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiUse JSONError
  */ 

@@ -34,7 +34,7 @@ let pushy = require('../utilities/utils').pushy
  * 
  * @apiError (400: Missing Parameters) {String} message "Missing required information"
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiError (400: Unknow Chat ID) {String} message "invalid chat id"
  * 
@@ -172,7 +172,7 @@ router.post("/", (request, response, next) => {
  * @apiError (400: Invalid Parameter) {String} message "Malformed parameter. chatId must be a number" 
  * @apiError (400: Missing Parameters) {String} message "Missing required information"
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiUse JSONError
  */ 

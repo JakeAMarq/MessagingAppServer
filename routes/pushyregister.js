@@ -25,7 +25,7 @@ router.use(require("body-parser").json())
  * 
  * @apiError (400: JSON Error) {String} message "malformed JSON in parameters"
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  */ 
 router.put('/', (request, response, next) => {
     //validate on missing parameters
@@ -103,7 +103,7 @@ router.put('/', (request, response, next) => {
  * 
  * @apiError (400: JSON Error) {String} message "malformed JSON in parameters"
  * 
- * @apiError (400: SQL Error) {String} message the reported SQL error details
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
  */ 
 router.delete('/', (request, response, next) => {
     //the JWT middleware.js function decodes the JWT and stores the email 
