@@ -260,18 +260,18 @@ router.delete("/delete/", (request, response, next) => {
     }
 }, (request, response, next) => {
     // Validate user exists
-    var insert;
+    var query;
     if (request.body.user.includes("@")) {
-        insert = `SELECT MemberId 
+        query = `SELECT MemberId 
                     FROM Members
                     WHERE Email=$1`
     } else {
-        insert = `SELECT MemberId
+        query = `SELECT MemberId
                     FROM Members
                     WHERE Username=$1`
     }    
     let values = [request.body.user]
-    pool.query(insert, values)
+    pool.query(query, values)
         .then(result => {
             if (result.rowCount == 0) {
                 response.status(404).send({
@@ -292,7 +292,7 @@ router.delete("/delete/", (request, response, next) => {
     // Validate the two users are contacts
     let insert = `SELECT PrimaryKey FROM Contacts
                     WHERE (MemberID_A=$1 AND MemberID_B=$2)
-                    OR (MemberID_B=$1 AND MemberID_A=$1)`
+                    OR (MemberID_B=$1 AND MemberID_A=$2)`
     let values = [request.body.memberid, request.decoded.memberid]
     pool.query(insert, values)
         .then(result => {

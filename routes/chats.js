@@ -287,12 +287,12 @@ router.put("/", (request, response, next) => {
 }, (request, response, next) => {
     //validate user exists and get their memberid
     var query;
-    if (request.body.user.includes("a")) {
+    if (request.body.user.includes("@")) {
         query = `SELECT MemberId FROM Members WHERE Email=$1`
     } else {
         query = `SELECT MemberId FROM Members WHERE Username=$1`
     }
-    let values = [request.body.email]
+    let values = [request.body.user]
 
     pool.query(query, values)
         .then(result => {
@@ -454,7 +454,7 @@ router.delete("/:chatId/:user", (request, response, next) => {
 }, (request, response, next) => {
     //validate user exists AND convert it to the associated memberId
     var query;
-    if (request.params.user.includes("a")) {
+    if (request.params.user.includes("@")) {
         query = `SELECT MemberId FROM Members WHERE Email=$1`
     } else {
         query = `SELECT MemberId FROM Members WHERE Username=$1`
