@@ -9,6 +9,8 @@ const bodyParser = require("body-parser");
 //This allows parsing of the body of POST requests, that are encoded in JSON
 app.use(bodyParser.json())
 
+// TODO: Automated testing for all endpoints
+
 app.use('/auth', require('./routes/register.js'))
 app.use('/auth', require('./routes/signin.js'))
 app.use('/auth', middleware.checkToken, require('./routes/changepassword'))
