@@ -1,9 +1,105 @@
 [
   {
+    "type": "post",
+    "url": "auth/changepassword",
+    "title": "Request to change a user's password",
+    "name": "ChangePassword",
+    "group": "Auth",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Valid JSON Web Token JWT</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "currentpassword",
+            "description": "<p>the user's current password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "newpassword",
+            "description": "<p>the user's new password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 201": [
+          {
+            "group": "Success 201",
+            "type": "boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>true when the password is changed</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400: Missing Parameters": [
+          {
+            "group": "400: Missing Parameters",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Missing required information</p>"
+          }
+        ],
+        "400: Same password": [
+          {
+            "group": "400: Same password",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>New password cannot be the same as current password</p>"
+          }
+        ],
+        "400: Invalid password": [
+          {
+            "group": "400: Invalid password",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>New password does not match required criteria</p>"
+          }
+        ],
+        "400: SQL Error": [
+          {
+            "group": "400: SQL Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The reported SQL error details</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/changepassword.js",
+    "groupTitle": "Auth"
+  },
+  {
     "type": "delete",
     "url": "auth",
     "title": "Request to delete a Pushy Token for the user",
-    "name": "DeleteAuth",
+    "name": "DeletePushyToken",
     "group": "Auth",
     "header": {
       "fields": {
@@ -79,7 +175,7 @@
     "type": "put",
     "url": "auth",
     "title": "Request to insert a Pushy Token for the user",
-    "name": "PutAuth",
+    "name": "InsertPushyToken",
     "group": "Auth",
     "header": {
       "fields": {
@@ -137,7 +233,7 @@
             "type": "String",
             "optional": false,
             "field": "message",
-            "description": "<p>&quot;user not found&quot;</p>"
+            "description": "<p>&quot;User not found&quot;</p>"
           }
         ],
         "400: JSON Error": [
@@ -271,7 +367,7 @@
   {
     "type": "get",
     "url": "auth/signin",
-    "title": "Request to sign a user in the system",
+    "title": "Request to sign a user in",
     "name": "SignIn",
     "group": "Auth",
     "header": {
@@ -458,7 +554,7 @@
     "title": "Request add a user to a chat room",
     "name": "AddUserToChat",
     "group": "Chats",
-    "description": "<p>Adds the user associated with the email in the body.</p>",
+    "description": "<p>Adds the user associated with the username/email in the body.</p>",
     "header": {
       "fields": {
         "Header": [
@@ -486,8 +582,8 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "email",
-            "description": "<p>the email of the user to add</p>"
+            "field": "user",
+            "description": "<p>the username/email of the user being added</p>"
           }
         ]
       }
@@ -695,7 +791,7 @@
     "title": "Request to get the chats a specific user is a part of",
     "name": "GetChats",
     "group": "Chats",
-    "description": "<p>Returns the chatIds of every chat the user associated with the required JWT is a part of</p>",
+    "description": "<p>Returns the name, ID, and owner of every chat room the user associated with the required JWT is a part of</p>",
     "header": {
       "fields": {
         "Header": [
@@ -1786,7 +1882,7 @@
   },
   {
     "type": "post",
-    "url": "messages",
+    "url": "messages/",
     "title": "Request to add a message to a specific chat",
     "name": "PostMessages",
     "group": "Messages",

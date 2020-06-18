@@ -19,7 +19,7 @@ let config = {
 }
 
 /**
- * @api {get} auth/signin Request to sign a user in the system
+ * @api {get} auth/signin Request to sign a user in
  * @apiName SignIn
  * @apiGroup Auth
  * 
@@ -50,7 +50,6 @@ router.get('/signin/', (request, response) => {
         pool.query(theQuery, values)
             .then(result => { 
                 if (result.rowCount == 0) {
-                    console.log(53);
                     response.status(404).send({
                         message: 'User not found' 
                     })
@@ -77,7 +76,6 @@ router.get('/signin/', (request, response) => {
                         }
                     )
                     //package and send the results
-                    console.log(79);
                     response.json({
                         success: true,
                         message: 'Authentication successful!',
@@ -85,22 +83,17 @@ router.get('/signin/', (request, response) => {
                     })
                 } else {
                     //credentials dod not match
-                    console.log(86);
                     response.status(400).send({
                         message: 'Credentials did not match' 
                     })
                 }
             })
             .catch((err) => {
-                //log the error
-                //console.log(err.stack)
-                console.log(err);
                 response.status(400).send({
                     message: err.detail
                 })
             })
     } else {
-        console.log(99);
         response.status(400).send({
             message: "Missing required information"
         })

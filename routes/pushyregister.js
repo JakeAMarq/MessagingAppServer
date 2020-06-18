@@ -11,7 +11,7 @@ router.use(require("body-parser").json())
 
 /**
  * @api {put} auth Request to insert a Pushy Token for the user
- * @apiName PutAuth
+ * @apiName InsertPushyToken
  * @apiGroup Auth
  * 
  * @apiHeader {String} authorization Valid JSON Web Token JWT
@@ -20,11 +20,8 @@ router.use(require("body-parser").json())
  * @apiSuccess {boolean} success true when the pushy token is inserted
  * 
  * @apiError (400: Missing Parameters) {String} message "Missing required information"
- * 
- * @apiError (404: User Not Found) {String} message "user not found"
- * 
+ * @apiError (404: User Not Found) {String} message "User not found"
  * @apiError (400: JSON Error) {String} message "malformed JSON in parameters"
- * 
  * @apiError (400: SQL Error) {String} message The reported SQL error details
  */ 
 router.put('/', (request, response, next) => {
@@ -54,7 +51,7 @@ router.put('/', (request, response, next) => {
                 //JWT created by this service. But, keep the check here
                 //anyway.
                 response.status(404).send({
-                    message: "user not found"
+                    message: "User not found"
                 })
             } else {
                 //user found
@@ -67,7 +64,7 @@ router.put('/', (request, response, next) => {
             })
         })
 }, (request, response) => {
-    //ON CONFLICT is a Postgressql syntax. it allows for an extra
+    //ON CONFLICT is a PostgreSql syntax. it allows for an extra
     //action when conflicts occur with inserts. This will update 
     //an exisiting users token. 
     let insert = `INSERT INTO Push_Token(MemberId, Token)
@@ -90,7 +87,7 @@ router.put('/', (request, response, next) => {
 
 /**
  * @api {delete} auth Request to delete a Pushy Token for the user
- * @apiName DeleteAuth
+ * @apiName DeletePushyToken
  * @apiGroup Auth
  * 
  * @apiHeader {String} authorization Valid JSON Web Token JWT

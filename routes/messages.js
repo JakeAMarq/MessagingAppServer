@@ -17,7 +17,7 @@ let pushy = require('../utilities/utils').pushy
  */ 
 
 /**
- * @api {post} messages Request to add a message to a specific chat
+ * @api {post} messages/ Request to add a message to a specific chat
  * @apiName PostMessages
  * @apiGroup Messages
  * 

@@ -42,10 +42,10 @@ function containsNumbers(str) {
     for (i = 0, len = str.length; i < len; i++) {
         code = str.charCodeAt(i);
         if (code > 47 && code < 58) { // numeric (0-9)
-            return false;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 function isAlphaNumeric(str) {
@@ -62,7 +62,7 @@ function isAlphaNumeric(str) {
   };
 
 function containsSpecialCharacters(str) {
-    let specialChars = "*|,\":<>[]{}`\';()@&$#%";
+    let specialChars = '!@#$%^&*()-_=+[{]};:\'",<.>/?`~\\|';
     for (let i = 0; i < str.length; i++) {
         if (specialChars.indexOf(str.charAt(i)) != -1) {
             return true;
@@ -72,18 +72,18 @@ function containsSpecialCharacters(str) {
 }
 
 function validName(str) {
-    return isAlphaNumeric(str) && !containsNumbers(str) && str.length > 1;
+    return isAlphaNumeric(str) && !containsNumbers(str) && str.length >= 1 && str.length <= 20;
 }
 
 function validUsername(str) {
-    return isAlphaNumeric(str) && str.length > 1 && str.length <= 20;
+    return isAlphaNumeric(str) && str.length >= 1 && str.length <= 30;
 }
 
 function validPassword(str) {
     return containsUppercaseLetters(str) && 
             containsNumbers(str) && 
             containsSpecialCharacters(str) && 
-            str.length >= 8 && str.length <= 30;
+            str.length >= 8 && str.length <= 50;
 }
 
 function validRegistration(first, last, username, email, password) {
@@ -94,5 +94,5 @@ function validRegistration(first, last, username, email, password) {
 }
 
 module.exports = { 
-    pool, getHash
+    pool, getHash, validName, validUsername, validPassword
 };

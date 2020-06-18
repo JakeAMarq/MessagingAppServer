@@ -11,8 +11,6 @@ router.use(require("body-parser").json())
 
 let pushy = require('../utilities/utils').pushy
 
-// TODO: Make chat endpoints support both usernames and emails like contacts
-
 /**
  * @apiDefine JSONError
  * @apiError (400: JSON Error) {String} message "malformed JSON in parameters"
@@ -209,12 +207,12 @@ router.delete("/:chatId", (request, response, next) => {
  * @apiName AddUserToChat
  * @apiGroup Chats
  * 
- * @apiDescription Adds the user associated with the email in the body. 
+ * @apiDescription Adds the user associated with the username/email in the body. 
  * 
  * @apiHeader {String} authorization Valid JSON Web Token JWT
  * 
  * @apiParam {Number} chatId the chat to add the user to
- * @apiParam {String} email the email of the user to add
+ * @apiParam {String} user the username/email of the user being added
  * 
  * @apiSuccess {boolean} success true when the name is inserted
  * 
@@ -231,7 +229,7 @@ router.delete("/:chatId", (request, response, next) => {
  * @apiUse JSONError
  */ 
 router.put("/", (request, response, next) => {
-    if (!request.body.chatId || !request.body.email) {
+    if (!request.body.chatId || !request.body.user) {
         response.status(400).send({
             message: "Missing required information"
         })
@@ -287,8 +285,13 @@ router.put("/", (request, response, next) => {
             })
         })
 }, (request, response, next) => {
-    //validate email exists 
-    let query = 'SELECT MemberId FROM Members WHERE Email=$1'
+    //validate user exists and get their memberid
+    var query;
+    if (request.body.user.includes("a")) {
+        query = `SELECT MemberId FROM Members WHERE Email=$1`
+    } else {
+        query = `SELECT MemberId FROM Members WHERE Username=$1`
+    }
     let values = [request.body.email]
 
     pool.query(query, values)
@@ -415,9 +418,9 @@ router.put("/", (request, response, next) => {
  * 
  * @apiUse JSONError
  */ 
-router.delete("/:chatId/:email", (request, response, next) => {
+router.delete("/:chatId/:user", (request, response, next) => {
     //validate on empty parameters
-    if (!request.params.chatId || !request.params.email) {
+    if (!request.params.chatId || !request.params.user) {
         response.status(400).send({
             message: "Missing required information"
         })
@@ -449,9 +452,14 @@ router.delete("/:chatId/:email", (request, response, next) => {
             })
         })
 }, (request, response, next) => {
-    //validate email exists AND convert it to the associated memberId
-    let query = 'SELECT MemberID FROM Members WHERE Email=$1'
-    let values = [request.params.email]
+    //validate user exists AND convert it to the associated memberId
+    var query;
+    if (request.params.user.includes("a")) {
+        query = `SELECT MemberId FROM Members WHERE Email=$1`
+    } else {
+        query = `SELECT MemberId FROM Members WHERE Username=$1`
+    }
+    let values = [request.params.user]
 
     pool.query(query, values)
         .then(result => {
@@ -575,7 +583,7 @@ router.get("/:chatId", (request, response, next) => {
     } else {
         next()
     }
-},  (request, response, next) => {
+}, (request, response, next) => {
     //validate chat id exists
     let query = 'SELECT * FROM CHATS WHERE ChatId=$1'
     let values = [request.params.chatId]
@@ -596,7 +604,7 @@ router.get("/:chatId", (request, response, next) => {
             })
         })
 }, (request, response) => {
-        //REtrive the members
+        // Retrieve the members
         let query = `SELECT Members.Email 
                     FROM ChatMembers
                     INNER JOIN Members ON ChatMembers.MemberId=Members.MemberId
@@ -621,7 +629,7 @@ router.get("/:chatId", (request, response, next) => {
  * @apiName GetChats
  * @apiGroup Chats
  * 
- * @apiDescription Returns the chatIds of every chat the user associated with the required JWT is a part of
+ * @apiDescription Returns the name, ID, and owner of every chat room the user associated with the required JWT is a part of
  * 
  * @apiHeader {String} authorization Valid JSON Web Token JWT
  *  
@@ -634,7 +642,6 @@ router.get("/:chatId", (request, response, next) => {
  * @apiError (404: Member Not Found) {String} message Member not Found
  * @apiError (400: Invalid Parameter) {String} message Malformed parameter. chatId must be a number
  * @apiError (400: Missing Parameters) {String} message Missing required information
- * 
  * @apiError (400: SQL Error) {String} message The reported SQL error details
  * 
  * @apiUse JSONError
