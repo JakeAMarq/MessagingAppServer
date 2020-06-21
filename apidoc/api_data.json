@@ -1661,9 +1661,102 @@
   },
   {
     "type": "get",
-    "url": "contacts/search/",
-    "title": "Get list of users",
+    "url": "contacts/outgoing/",
+    "title": "Get outgoing contact requests",
     "name": "GetOutgoingContactRequests",
+    "group": "Contacts",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Valid JSON Web Token JWT</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "rowCount",
+            "description": "<p>The number of contacts returned</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "rows",
+            "description": "<p>List of contacts</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.firstname",
+            "description": "<p>The first name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.lastname",
+            "description": "<p>The last name of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.username",
+            "description": "<p>The username of the contact</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.email",
+            "description": "<p>The email of the contact</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400: SQL Error": [
+          {
+            "group": "400: SQL Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The reported SQL error details</p>"
+          }
+        ],
+        "400: JSON Error": [
+          {
+            "group": "400: JSON Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;malformed JSON in parameters&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/contacts.js",
+    "groupTitle": "Contacts"
+  },
+  {
+    "type": "get",
+    "url": "contacts/search/existing/",
+    "title": "Search list of current contacts",
+    "name": "SearchExistingContacts",
     "group": "Contacts",
     "header": {
       "fields": {
@@ -1767,9 +1860,9 @@
   },
   {
     "type": "get",
-    "url": "contacts/outgoing/",
-    "title": "Get outgoing contact requests",
-    "name": "GetOutgoingContactRequests",
+    "url": "contacts/search/new/",
+    "title": "Search users that aren't in your contacts",
+    "name": "SearchNewContacts",
     "group": "Contacts",
     "header": {
       "fields": {
@@ -1784,6 +1877,19 @@
         ]
       }
     },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The username/email/name of user being searched for</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
@@ -1792,42 +1898,42 @@
             "type": "Number",
             "optional": false,
             "field": "rowCount",
-            "description": "<p>The number of contacts returned</p>"
+            "description": "<p>The number of users returned</p>"
           },
           {
             "group": "Success 200",
             "type": "Object[]",
             "optional": false,
             "field": "rows",
-            "description": "<p>List of contacts</p>"
+            "description": "<p>List of users</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "rows.firstname",
-            "description": "<p>The first name of the contact</p>"
+            "description": "<p>The first name of the user</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "rows.lastname",
-            "description": "<p>The last name of the contact</p>"
+            "description": "<p>The last name of the user</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "rows.username",
-            "description": "<p>The username of the contact</p>"
+            "description": "<p>The username of the user</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "rows.email",
-            "description": "<p>The email of the contact</p>"
+            "description": "<p>The email of the user</p>"
           }
         ]
       }
