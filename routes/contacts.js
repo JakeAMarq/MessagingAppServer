@@ -17,7 +17,7 @@ let pushy = require('../utilities/utils').pushy
  */ 
 
 /**
- * @api {post} chats/add/ Send contact request to user
+ * @api {post} contacts/add/ Send contact request to user
  * @apiName AddContact
  * @apiGroup Contacts
  * 
@@ -127,7 +127,7 @@ router.post("/add/", (request, response, next) => {
  */ 
 
 /**
- * @api {patch} chats/accept/ Accept a user's contact request
+ * @api {patch} contacts/accept/ Accept a user's contact request
  * @apiName AcceptContact
  * @apiGroup Contacts
  * 
@@ -232,7 +232,7 @@ router.patch("/accept/", (request, response, next) => {
 })
 
 /**
- * @api {post} chats/delete/ Delete a user from contacts
+ * @api {post} contacts/delete/ Delete a user from contacts
  * @apiName DeleteContact
  * @apiGroup Contacts
  * 
@@ -330,7 +330,7 @@ router.delete("/delete/", (request, response, next) => {
 })
 
 /**
- * @api {get} chats/ Get contacts list
+ * @api {get} contacts/ Get contacts list
  * @apiName GetContacts
  * @apiGroup Contacts
  * 
@@ -370,7 +370,7 @@ router.get("/", (request, response) => {
 })
 
 /**
- * @api {get} chats/incoming/ Get incoming contact requests
+ * @api {get} contacts/incoming/ Get incoming contact requests
  * @apiName GetIncomingContactRequests
  * @apiGroup Contacts
  * 
@@ -408,7 +408,7 @@ router.get("/incoming/", (request, response) => {
 })
 
 /**
- * @api {get} chats/incoming/ Get outgoing contact requests
+ * @api {get} contacts/outgoing/ Get outgoing contact requests
  * @apiName GetOutgoingContactRequests
  * @apiGroup Contacts
  * 
@@ -430,6 +430,136 @@ router.get("/outgoing/", (request, response) => {
                     FROM Members, Contacts
                     WHERE Contacts.MemberId_B=Members.MemberId
                         AND Contacts.MemberId_A=$1 AND Verified=0`
+    let values = [request.decoded.memberid]
+    pool.query(insert, values)
+        .then(result => {
+            response.status(200).send({
+                rowCount: result.rowCount,
+                rows: result.rows
+            })
+        }).catch(err => {
+            response.status(400).send({
+                message: "SQL Error",
+                error: err
+            })
+        })
+})
+
+/**
+ * @api {get} contacts/search/new/ Search users that aren't in your contacts
+ * @apiName SearchNewContacts
+ * @apiGroup Contacts
+ * 
+ * @apiHeader {String} authorization Valid JSON Web Token JWT
+ * @apiParam {String} user The username/email/name of user being searched for 
+ * 
+ * @apiSuccess {Number} rowCount The number of users returned
+ * @apiSuccess {Object[]} rows List of users
+ * @apiSuccess {String} rows.firstname The first name of the user
+ * @apiSuccess {String} rows.lastname The last name of the user
+ * @apiSuccess {String} rows.username The username of the user
+ * @apiSuccess {String} rows.email The email of the user
+ *  
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
+ *  
+ * @apiUse JSONError
+ */ 
+router.get("/search/new/", (request, response, next) => {
+    if (!request.body.user) {
+        response.status(400).send({
+            message: "Missing required information"
+        })
+    } else {
+        next()
+    }
+}, (request, response, next) => {
+    // Getting current contacts so we can exclude them from search results
+    let insert = `SELECT MemberId
+                    FROM Members, Contacts
+                    WHERE (Contacts.MemberId_A=Members.MemberId
+                        AND Contacts.MemberId_B=$1) 
+                        OR (Contacts.MemberId_B=Members.MemberId
+                        AND Contacts.MemberId_A=$1)`
+    let values = [request.decoded.memberid]
+    pool.query(insert, values)
+        .then(result => {
+            request.body.rowCount = result.rowCount;
+            request.body.rows = result.rows;
+            next();
+        }).catch(err => {
+            response.status(400).send({
+                message: "SQL Error",
+                error: err
+            })
+        })
+}, (request, response) => {
+    let insert = `SELECT firstname, lastname, username, email
+                    FROM Members
+                    WHERE MemberId!=$1`;
+    // excluding current contacts from search results
+    for(let i = 0; i < request.body.rowCount; i++) {
+        insert += `
+                    AND MemberId!=${request.body.rows[i].memberid}`
+    }
+    insert += `
+                    AND (UserName LIKE '%${request.body.user}%'
+                    OR Email LIKE '%${request.body.user}%'
+                    OR FirstName LIKE '%${request.body.user}%'
+                    OR LastName LIKE '%${request.body.user}%')`
+    let values = [request.decoded.memberid]
+    pool.query(insert, values)
+        .then(result => {
+            response.status(200).send({
+                rowCount: result.rowCount,
+                rows: result.rows
+            })
+        }).catch(err => {
+            response.status(400).send({
+                message: "SQL Error",
+                error: err
+            })
+        })
+})
+
+/**
+ * @api {get} contacts/search/existing/ Search list of current contacts
+ * @apiName SearchExistingContacts
+ * @apiGroup Contacts
+ * 
+ * @apiHeader {String} authorization Valid JSON Web Token JWT
+ * @apiParam {String} user The username/email/name of user being searched for 
+ * 
+ * @apiSuccess {Number} rowCount The number of users returned
+ * @apiSuccess {Object[]} rows List of users
+ * @apiSuccess {String} rows.firstname The first name of the user
+ * @apiSuccess {String} rows.lastname The last name of the user
+ * @apiSuccess {String} rows.username The username of the user
+ * @apiSuccess {String} rows.email The email of the user
+ *  
+ * @apiError (400: SQL Error) {String} message The reported SQL error details
+ *  
+ * @apiUse JSONError
+ */ 
+router.get("/search/existing/", (request, response, next) => {
+    if (!request.body.user) {
+        response.status(400).send({
+            message: "Missing required information"
+        })
+    } else {
+        next()
+    }
+}, (request, response) => {
+    // Getting current contacts so we can exclude them from search results
+    let insert = `SELECT firstname, lastname, username, email
+                    FROM Members, Contacts
+                    WHERE ((Contacts.MemberId_A=Members.MemberId
+                        AND Contacts.MemberId_B=$1 AND Verified=1) 
+                        OR (Contacts.MemberId_B=Members.MemberId
+                        AND Contacts.MemberId_A=$1 AND Verified=1))
+                    AND (UserName LIKE '%${request.body.user}%'
+                        OR Email LIKE '%${request.body.user}%'
+                        OR FirstName LIKE '%${request.body.user}%'
+                        OR LastName LIKE '%${request.body.user}%')`
     let values = [request.decoded.memberid]
     pool.query(insert, values)
         .then(result => {

@@ -1,7 +1,7 @@
 {
-  "name": "450-lab",
+  "name": "jakeamarq-messaging-app",
   "version": "1.0.0",
-  "description": "TCSS 450 Lab for creating a webservice",
+  "description": "Jacob Marquardt's Messaging App",
   "main": "index.js",
   "scripts": {
     "test": "index.js",

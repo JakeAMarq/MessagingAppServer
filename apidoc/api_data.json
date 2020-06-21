@@ -1133,7 +1133,7 @@
   },
   {
     "type": "patch",
-    "url": "chats/accept/",
+    "url": "contacts/accept/",
     "title": "Accept a user's contact request",
     "name": "AcceptContact",
     "group": "Contacts",
@@ -1247,7 +1247,7 @@
   },
   {
     "type": "post",
-    "url": "chats/add/",
+    "url": "contacts/add/",
     "title": "Send contact request to user",
     "name": "AddContact",
     "group": "Contacts",
@@ -1370,7 +1370,7 @@
   },
   {
     "type": "post",
-    "url": "chats/delete/",
+    "url": "contacts/delete/",
     "title": "Delete a user from contacts",
     "name": "DeleteContact",
     "group": "Contacts",
@@ -1475,7 +1475,7 @@
   },
   {
     "type": "get",
-    "url": "chats/",
+    "url": "contacts/",
     "title": "Get contacts list",
     "name": "GetContacts",
     "group": "Contacts",
@@ -1568,7 +1568,7 @@
   },
   {
     "type": "get",
-    "url": "chats/incoming/",
+    "url": "contacts/incoming/",
     "title": "Get incoming contact requests",
     "name": "GetIncomingContactRequests",
     "group": "Contacts",
@@ -1661,7 +1661,113 @@
   },
   {
     "type": "get",
-    "url": "chats/incoming/",
+    "url": "contacts/search/",
+    "title": "Get list of users",
+    "name": "GetOutgoingContactRequests",
+    "group": "Contacts",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Valid JSON Web Token JWT</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user",
+            "description": "<p>The username/email/name of user being searched for</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "rowCount",
+            "description": "<p>The number of users returned</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "rows",
+            "description": "<p>List of users</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.firstname",
+            "description": "<p>The first name of the user</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.lastname",
+            "description": "<p>The last name of the user</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.username",
+            "description": "<p>The username of the user</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "rows.email",
+            "description": "<p>The email of the user</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400: SQL Error": [
+          {
+            "group": "400: SQL Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>The reported SQL error details</p>"
+          }
+        ],
+        "400: JSON Error": [
+          {
+            "group": "400: JSON Error",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>&quot;malformed JSON in parameters&quot;</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "routes/contacts.js",
+    "groupTitle": "Contacts"
+  },
+  {
+    "type": "get",
+    "url": "contacts/outgoing/",
     "title": "Get outgoing contact requests",
     "name": "GetOutgoingContactRequests",
     "group": "Contacts",
