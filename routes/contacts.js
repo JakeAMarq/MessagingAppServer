@@ -465,7 +465,7 @@ router.get("/outgoing/", (request, response) => {
  * @apiUse JSONError
  */ 
 router.get("/search/new/", (request, response, next) => {
-    console.log(request.body.user);
+    console.log(request.body);
     if (!request.body.user) {
         response.status(400).send({
             message: "Missing required information"
