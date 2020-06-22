@@ -451,7 +451,7 @@ router.get("/outgoing/", (request, response) => {
  * @apiGroup Contacts
  * 
  * @apiHeader {String} authorization Valid JSON Web Token JWT
- * @apiParam {String} user The username/email/name of user being searched for 
+ * @apiParam (query) {String} user The username/email/name of user being searched for 
  * 
  * @apiSuccess {Number} rowCount The number of users returned
  * @apiSuccess {Object[]} rows List of users
@@ -465,8 +465,7 @@ router.get("/outgoing/", (request, response) => {
  * @apiUse JSONError
  */ 
 router.get("/search/new/", (request, response, next) => {
-    console.log(request.body);
-    if (!request.body.user) {
+    if (!request.query.user) {
         response.status(400).send({
             message: "Missing required information"
         })
@@ -503,10 +502,10 @@ router.get("/search/new/", (request, response, next) => {
                     AND MemberId!=${request.body.rows[i].memberid}`
     }
     insert += `
-                    AND (UserName LIKE '%${request.body.user}%'
-                    OR Email LIKE '%${request.body.user}%'
-                    OR FirstName LIKE '%${request.body.user}%'
-                    OR LastName LIKE '%${request.body.user}%')`
+                    AND (UserName LIKE '%${request.query.user}%'
+                    OR Email LIKE '%${request.query.user}%'
+                    OR FirstName LIKE '%${request.query.user}%'
+                    OR LastName LIKE '%${request.query.user}%')`
     let values = [request.decoded.memberid]
     pool.query(insert, values)
         .then(result => {

@@ -1879,9 +1879,9 @@ define({ "api": [
     },
     "parameter": {
       "fields": {
-        "Parameter": [
+        "query": [
           {
-            "group": "Parameter",
+            "group": "query",
             "type": "String",
             "optional": false,
             "field": "user",
