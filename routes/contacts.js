@@ -541,7 +541,7 @@ router.get("/search/new/", (request, response, next) => {
  * @apiUse JSONError
  */ 
 router.get("/search/existing/", (request, response, next) => {
-    if (!request.body.user) {
+    if (!request.query.user) {
         response.status(400).send({
             message: "Missing required information"
         })
@@ -556,10 +556,10 @@ router.get("/search/existing/", (request, response, next) => {
                         AND Contacts.MemberId_B=$1 AND Verified=1) 
                         OR (Contacts.MemberId_B=Members.MemberId
                         AND Contacts.MemberId_A=$1 AND Verified=1))
-                    AND (UserName LIKE '%${request.body.user}%'
-                        OR Email LIKE '%${request.body.user}%'
-                        OR FirstName LIKE '%${request.body.user}%'
-                        OR LastName LIKE '%${request.body.user}%')`
+                    AND (UserName LIKE '%${request.query.user}%'
+                        OR Email LIKE '%${request.query.user}%'
+                        OR FirstName LIKE '%${request.query.user}%'
+                        OR LastName LIKE '%${request.query.user}%')`
     let values = [request.decoded.memberid]
     pool.query(insert, values)
         .then(result => {
