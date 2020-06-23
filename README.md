@@ -5,5 +5,5 @@ This is a collection of API endpoints I created for a currently unnamed android 
 For full, current documentation of this API, go to: <br>
 https://jakeamarq-messaging-app.herokuapp.com/doc/ <br>
 <br>
-For the source code, apk, and current status of the application, go to: <br>
+For the source code, APK, and/or current status of the application, go to: <br>
 https://github.com/JakeAMarq/MessagingApp
