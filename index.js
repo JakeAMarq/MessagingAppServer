@@ -1,3 +1,9 @@
+// // TODO: DELETE THIS SHIT
+// const sendEmail = require('./utilities/utils.js').sendEmail
+
+// sendEmail("jacobmarquardt1@gmail.com", "Test", "successful??")
+
+
 //express is the framework we're going to use to handle requests
 const express = require('express')
 //Create a new instance of express
@@ -25,7 +31,6 @@ app.use('/contacts', middleware.checkToken, require('./routes/contacts.js'))
  * request parameters.
  */
 app.use(function(err, req, res, next) {
-
   if (err instanceof SyntaxError && err.status === 400 && "body" in err) {
     res.status(400).send({ 
       message: "malformed JSON in parameters" 
@@ -55,6 +60,10 @@ app.get("/", (request, response) => {
  * https://apidocjs.com/
  */
 app.use("/doc", express.static('apidoc'))
+
+app.get("/apk", (request, response) => {
+  response.download('./app-debug.apk', 'MessagingApp.apk')
+})
 
 /* 
 * Heroku will assign a port you can use via the 'PORT' environment variable
