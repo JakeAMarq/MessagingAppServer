@@ -5,15 +5,13 @@ const express = require('express')
 const crypto = require("crypto")
 
 //Access the connection to Heroku Database
-let pool = require('../utilities/utils').pool
+let pool = require('../../utilities/utils').pool
 
-let getHash = require('../utilities/utils').getHash
-
-let sendEmail = require('../utilities/utils').sendEmail
-
-let validName = require('../utilities/utils').validName
-let validUsername = require('../utilities/utils').validUsername
-let validPassword = require('../utilities/utils').validPassword
+let getHash = require('../../utilities/utils').getHash
+let sendEmail = require('../../utilities/utils').sendEmail
+let validName = require('../../utilities/utils').validName
+let validUsername = require('../../utilities/utils').validUsername
+let validPassword = require('../../utilities/utils').validPassword
 
 var router = express.Router()
 
@@ -21,8 +19,6 @@ const bodyParser = require("body-parser")
 //This allows parsing of the body of POST requests, that are encoded in JSON
 router.use(bodyParser.json())
 
-// TODO: Email verification
-// TODO: Forgot password
 // TODO: Improve validation
 
 /**
@@ -91,9 +87,7 @@ router.post('/register/', (request, response, next) => {
             message: "Invalid password"
         })
     }
-}, (request, response) => {
-    response.type("application/json")
-
+}, (request, response, next) => {
     //Retrieve data from query params
     var first = request.body.first
     var last = request.body.last
@@ -109,16 +103,12 @@ router.post('/register/', (request, response, next) => {
 
     //We're using placeholders ($1, $2, $3) in the SQL query string to avoid SQL Injection
     //If you want to read more: https://stackoverflow.com/a/8265319
-    let query = "INSERT INTO MEMBERS(FirstName, LastName, Username, Email, Password, Salt) VALUES ($1, $2, $3, $4, $5, $6) RETURNING Email"
+    let query = "INSERT INTO MEMBERS(FirstName, LastName, Username, Email, Password, Salt) VALUES ($1, $2, $3, $4, $5, $6) RETURNING MemberId"
     let values = [first, last, username, email, salted_hash, salt]
     pool.query(query, values)
         .then(result => {
-            //We successfully added the user, let the user know
-            response.status(201).send({
-                success: true,
-                email: result.rows[0].email
-            })
-            sendEmail("uwnetid@uw.edu", email, "Welcome!", "<strong>Welcome to our app!</strong>");
+            request.body.memberid = result.rows[0].memberid;
+            next();
         })
         .catch((err) => {
             if (err.constraint == "members_username_key") {
@@ -135,6 +125,33 @@ router.post('/register/', (request, response, next) => {
                 })
             }
         })
-})
+}, (request, response) => {
+    const min = 100000;
+    const max = 1000000;
+
+    let code = Math.floor(Math.random() * (max - min)) + min;
+    sendEmail(request.body.email, 
+        "Activate your account", 
+//                                     `Click the following link to activate your account:
+// https://jakeamarq-messaging-app.herokuapp.com/auth/activate?email=${request.body.email}&code=${code}`)
+        `Click the following link to activate your account:
+http://localhost:5000/auth/activate?email=${request.body.email}&code=${code}`)
+
+    let query = `INSERT INTO VerificationCodes(Code, MemberID)
+                    VALUES ($1, $2)`
+    let values = [code, request.body.memberid]
+    pool.query(query, values)
+        .then(result => {
+            response.status(200).send({
+                success: true
+            })
+        }).catch(error => {
+            response.status(400).send({
+                message: "SQL Error",
+                error: error
+            })
+        })
+
+}) 
 
 module.exports = router

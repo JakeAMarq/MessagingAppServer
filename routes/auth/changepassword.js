@@ -5,13 +5,11 @@ const express = require('express')
 const crypto = require('crypto')
 
 //Access the connection to Heroku Database
-let pool = require('../utilities/utils').pool
+let pool = require('../../utilities/utils').pool
 
-let getHash = require('../utilities/utils').getHash
+let getHash = require('../../utilities/utils').getHash
 
-let sendEmail = require('../utilities/utils').sendEmail
-
-let validPassword = require('../utilities/utils').validPassword
+let validPassword = require('../../utilities/utils').validPassword
 
 var router = express.Router()
 
@@ -86,7 +84,8 @@ router.patch('/changepassword/', (request, response, next) => {
         })
         .catch((err) => {
             response.status(400).send({
-                message: err.detail
+                message: "SQL Error on select from push token",
+                error: err
             })
         })
 }, (request, response) => {
@@ -104,7 +103,8 @@ router.patch('/changepassword/', (request, response, next) => {
         )
         .catch(err => {
             response.status(400).send({
-                message: err.detail
+                message: "SQL Error on select from push token",
+                error: err
             })
         })
 })

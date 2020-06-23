@@ -9,6 +9,12 @@ CREATE TABLE Members (MemberID SERIAL PRIMARY KEY,
                       Verification INT DEFAULT 0
 );
 
+DROP TABLE IF EXISTS VerificationCodes;
+CREATE TABLE VerificationCodes (Code INT NOT NULL, 
+                                MemberID INT NOT NULL,
+                                FOREIGN KEY(MemberID) REFERENCES Members(MemberID)
+);
+
 DROP TABLE IF EXISTS Contacts;
 CREATE TABLE Contacts(PrimaryKey SERIAL PRIMARY KEY,
                       MemberID_A INT NOT NULL,

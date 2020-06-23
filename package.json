@@ -1,19 +1,21 @@
 {
   "name": "450-lab",
   "version": "1.0.0",
-  "description": "TCSS 450 Lab for creating a webservice",
+  "description": "Messaging App API",
   "main": "index.js",
   "scripts": {
     "test": "index.js",
     "doc": "apidoc -i routes/ -o apidoc/",
-    "docs": "apidoc -i routes/ -o apidoc/"
+    "docs": "apidoc -i routes/ -o apidoc/",
+    "getConfigVars": "heroku config -a jakeamarq-messaging-app -s > .env",
+    "psql": "heroku pg:psql -a jakeamarq-messaging-app"
   },
   "keywords": [
     "TCSS450",
     "Mobile",
     "Apps"
   ],
-  "author": "TCSS 450",
+  "author": "Jacob Marquardt",
   "license": "MIT",
   "dependencies": {
     "apidoc": "^0.23.0",

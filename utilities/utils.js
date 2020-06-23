@@ -4,16 +4,28 @@ let pool = require('./sql_conn.js');
 //We use this create the SHA256 hash
 const crypto = require("crypto");
 
-function sendEmail(from, receiver, subj, message) {
-    //research nodemailer for sending email from node.
-    // https://nodemailer.com/about/
-    // https://www.w3schools.com/nodejs/nodejs_email.asp
-    //create a burner gmail account 
-    //make sure you add the password to the environmental variables
-    //similar to the DATABASE_URL and PHISH_DOT_NET_KEY (later section of the lab)
+const nodemailer = require("nodemailer")
 
-    //fake sending an email for now. Post a message to logs. 
-    console.log('Email sent: ' + message);
+function sendEmail(to, subj, message) {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            // TODO: Make a throwaway gmail, switch the account and pw over
+            user: process.env.GMAIL_USERNAME,
+            pass: process.env.GMAIL_PASSWORD
+        }
+    });
+
+    var mailOptions = {
+        from: process.env.GMAIL_USERNAME,
+        to: to,
+        subject: subj,
+        text: message
+    };
+    
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) console.log("Error sending emai:" + error);
+    });
 }  
 
 /**
@@ -94,5 +106,5 @@ function validRegistration(first, last, username, email, password) {
 }
 
 module.exports = { 
-    pool, getHash, validName, validUsername, validPassword
+    pool, sendEmail, getHash, validName, validUsername, validPassword
 };
