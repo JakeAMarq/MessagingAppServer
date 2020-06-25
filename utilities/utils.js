@@ -5,6 +5,7 @@ let pool = require('./sql_conn.js');
 const crypto = require("crypto");
 
 const nodemailer = require("nodemailer")
+<<<<<<< HEAD
 
 async function sendEmail(to, subj, message) {
     //research nodemailer for sending email from node.
@@ -38,6 +39,29 @@ async function sendEmail(to, subj, message) {
 
     //fake sending an email for now. Post a message to logs. 
     console.log('Email sent: ' + message);
+=======
+
+function sendEmail(to, subj, message) {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            // TODO: Make a throwaway gmail, switch the account and pw over
+            user: process.env.GMAIL_USERNAME,
+            pass: process.env.GMAIL_PASSWORD
+        }
+    });
+
+    var mailOptions = {
+        from: process.env.GMAIL_USERNAME,
+        to: to,
+        subject: subj,
+        text: message
+    };
+    
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) console.log("Error sending emai:" + error);
+    });
+>>>>>>> dev
 }  
 
 /**

@@ -16,15 +16,16 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json())
 
 // TODO: Automated testing for all endpoints
-
-app.use('/auth', require('./routes/register.js'))
-app.use('/auth', require('./routes/signin.js'))
-app.use('/auth', middleware.checkToken, require('./routes/changepassword'))
-app.use('/auth', middleware.checkToken, require('./routes/pushyregister.js'))
-// app.use('/weather', require('./routes/weather.js'))
-app.use('/chats', middleware.checkToken, require('./routes/chats.js'))
-app.use('/messages', middleware.checkToken, require('./routes/messages.js'))
-app.use('/contacts', middleware.checkToken, require('./routes/contacts.js'))
+// TODO: Look over documentation, specifically for activate, forgotpassword, changepassword
+app.use('/auth', require('./routes/auth/register'))
+app.use('/auth', require('./routes/auth/activate'))
+app.use('/auth', require('./routes/auth/signin'))
+app.use('/auth', require('./routes/auth/forgotpassword'))
+app.use('/auth', require('./routes/auth/changepassword'))
+app.use('/auth', middleware.checkToken, require('./routes/auth/pushyregister'))
+app.use('/chats', middleware.checkToken, require('./routes/chats'))
+app.use('/messages', middleware.checkToken, require('./routes/messages'))
+app.use('/contacts', middleware.checkToken, require('./routes/contacts'))
 
 /*
  * This middleware function will respond to improperly formed JSON in 
@@ -61,6 +62,10 @@ app.get("/", (request, response) => {
  */
 app.use("/doc", express.static('apidoc'))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev
 app.get("/apk", (request, response) => {
   response.download('./app-debug.apk', 'MessagingApp.apk')
 })
