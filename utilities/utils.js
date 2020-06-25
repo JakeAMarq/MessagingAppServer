@@ -5,41 +5,6 @@ let pool = require('./sql_conn.js');
 const crypto = require("crypto");
 
 const nodemailer = require("nodemailer")
-<<<<<<< HEAD
-
-async function sendEmail(to, subj, message) {
-    //research nodemailer for sending email from node.
-    // https://nodemailer.com/about/
-    // https://www.w3schools.com/nodejs/nodejs_email.asp
-    //create a burner gmail account 
-    //make sure you add the password to the environmental variables
-    //similar to the DATABASE_URL and PHISH_DOT_NET_KEY (later section of the lab)
-
-    let testAccount = await nodemailer.createTestAccount();
-
-    // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: testAccount.user, // generated ethereal user
-            pass: testAccount.pass, // generated ethereal password
-        }
-    });
-
-    // send mail with defined transport object
-    let info = await transporter.sendMail({
-        from: '"Messaging App" <verifyemail@messagingapp.com>', // sender address
-        to: to, // list of receivers
-        subject: subj, // Subject line
-        text: message, // plain text body
-        html: `<b>${message}</b>` // html body
-    });
-
-    //fake sending an email for now. Post a message to logs. 
-    console.log('Email sent: ' + message);
-=======
 
 function sendEmail(to, subj, message) {
     var transporter = nodemailer.createTransport({
@@ -61,7 +26,6 @@ function sendEmail(to, subj, message) {
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) console.log("Error sending emai:" + error);
     });
->>>>>>> dev
 }  
 
 /**

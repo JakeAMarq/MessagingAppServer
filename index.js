@@ -62,10 +62,6 @@ app.get("/", (request, response) => {
  */
 app.use("/doc", express.static('apidoc'))
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 app.get("/apk", (request, response) => {
   response.download('./app-debug.apk', 'MessagingApp.apk')
 })
